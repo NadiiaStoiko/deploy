@@ -1,0 +1,35 @@
+.choose-company {
+    ion-item {
+        display: flex;
+        flex-direction: column;
+
+        .company-info {
+            .company-name {
+                font-weight: bold;
+            }
+
+            .company-id {
+                font-size: 0.9em;
+                color: grey;
+            }
+        }
+    }
+
+    &__btn {
+        width: 90px;
+    }
+
+    &__companies {
+        display: flex;
+        width: 100%;
+        padding: 20px;
+    }
+
+    &__choose-btn {
+        margin-left: auto;
+    }
+
+    &__wrap {
+        margin-top: 20px;
+    }
+}

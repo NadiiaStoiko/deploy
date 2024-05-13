@@ -1,0 +1,85 @@
+.invoices {
+    width: 100%;
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        //margin-top: 60px;
+    }
+
+    &__content {
+        //border-left: 5px solid red;
+        //background: #ddd;
+        margin: 8px;
+        //--ion-background-color: transparent; /* Удаление серого фона */
+        //--ion-item-background: transparent; /* Удаление фона у вложенного ion-item */
+
+        ion-item-sliding ion-item {
+            --border-color: transparent;
+        }
+    }
+
+    &__options {
+        --ion-background-color: #e8e8e9;
+    }
+
+    .invoices__option ion-icon {
+        font-size: 24px; /* Размер иконки */
+    }
+
+    //.invoices__option span {
+    //    margin-top: 4px; /* Расстояние между иконкой и текстом */
+    //    font-size: 12px; /* Размер текста */
+    //}
+
+    &__option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        //width: 60px;
+        padding: 3px;
+    }
+
+    &__option-item {
+        background: #3980ff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        span {
+            color: white;
+            font-size: 10px;
+            //padding: 5px;
+            //margin: 5px;
+            margin-bottom: 5px;
+        }
+    }
+
+    ion-item-sliding {
+        --ion-background-color: #e8e8e9;
+    }
+
+    &__wrap {
+        display: flex;
+    }
+    &__icon-arrow {
+        display: flex;
+        margin-left: auto;
+        color: #3980ff;
+    }
+    &__data {
+        font-size: 12px;
+    }
+    .size {
+        padding: 2px;
+    }
+    &__items {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        border-left: 5px solid red;
+    }
+}

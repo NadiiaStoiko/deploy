@@ -1,0 +1,63 @@
+<ion-content class="invoices">
+    <h1 class="invoices__title">{{ title }}</h1>
+
+    <div class="invoices__search">
+        <ion-searchbar class="invoices__custom-search" placeholder="Search"></ion-searchbar>
+    </div>
+
+    <p class="ion-padding">Filter</p>
+<!--    <ion-item>-->
+<!--        <ion-label position="floating">Search by name, sum, date</ion-label>-->
+<!--        <ion-input-->
+<!--            type="text"-->
+<!--            placeholder="Search by name, sum, date"-->
+<!--            [(ngModel)]="searchFilter"-->
+<!--            (ionChange)="onInvoiceFilter($event)">-->
+<!--        </ion-input>-->
+<!--    </ion-item>-->
+
+    <div class="invoices__content">
+        <ion-item-sliding class="invoices__items" #itemSliding *ngFor="let invoice of invoices$ | async">
+            <ion-item>
+                <ion-label class="invoices__wrap">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="7" class="size"><strong>{{ invoice.contactName }}</strong></ion-col>
+                            <ion-col size="4" class="size"><strong>{{ invoice.totalAmount }} {{ invoice.currency }}</strong></ion-col>
+                            <ion-col size="1" class="size"></ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="7" class="invoices__data size">Invoice number: {{ invoice.invoiceNumber }}</ion-col>
+                            <ion-col size="4" class="invoices__data size"><span>{{ invoice.dateCreation }}</span></ion-col>
+                            <ion-col size="1" class="size">
+                                <ion-icon class="invoices__icon-arrow size" name="arrow-forward"></ion-icon>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="7" class="invoices__data size"><span>{{ invoice.invoiceStatus }}</span></ion-col>
+                            <ion-col size="4" class="invoices__data size">{{ invoice.mailStatus }}</ion-col>
+                            <ion-col size="1" class="size"></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-label>
+            </ion-item>
+            <ion-item-options class="invoices__options" side="end">
+                <div class="invoices__option-item">
+                    <ion-item-option class="invoices__option">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-item-option>
+                    <span>Delete</span>
+                </div>
+                <div class="invoices__option-item">
+                    <ion-item-option class="invoices__option">
+                        <ion-icon slot="icon-only" name="download"></ion-icon>
+                    </ion-item-option>
+                    <span>Download</span>
+                </div>
+            </ion-item-options>
+        </ion-item-sliding>
+    </div>
+</ion-content>
+
+
+

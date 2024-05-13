@@ -1,0 +1,159 @@
+<ion-content class="ion-padding auth">
+    <div class="auth__wrap">
+        <!-- <h1 class="auth__logo">LOGO</h1>-->
+        <ion-card class="block">
+            <form class="auth__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <ion-list class="">
+                    <div class="auth__items">
+                        <ion-label position="stacked" class="email-label">Email:</ion-label>
+                        <ion-input
+                            class="email-input"
+                            type="email"
+                            labelPlacement="stacked"
+                            formControlName="email"
+                            [ngClass]="{'has-error': (email.touched || email.dirty) && !email.valid}"
+                        >
+                        </ion-input>
+                        <p class="helperText">Your Organization Email</p>
+                        <p class="card-text help-block"
+                           *ngIf="(email?.touched || email?.dirty) && email?.errors">
+                            <small class="text-danger" *ngIf="email?.hasError('required')">
+                                {{ ERRERROR_MESSAGES.required }}
+                            </small>
+                            <small class="text-danger" *ngIf="email?.hasError('minlength')">
+                                {{ ERRERROR_MESSAGES.inputMinlength }}
+                            </small>
+                            <small class="text-danger" *ngIf="email?.hasError('maxlength')">
+                                {{ ERRERROR_MESSAGES.inputMaxlength }}
+                            </small>
+                        </p>
+                    </div>
+
+                    <div class="auth__items">
+                        <ion-label position="stacked" class="pass-label">Your Password</ion-label>
+                        <ion-input
+                            class="pass-input"
+                            labelPlacement="stacked"
+                            type="password"
+                            formControlName="password"
+                            [ngClass]="{'has-error': (password.touched || password.dirty) && !password.valid}"
+                        >
+                        </ion-input>
+                        <p class="helperText">Your password</p>
+                        <p class="card-text help-block"
+                           *ngIf="(password?.touched || password?.dirty) && password?.errors">
+                            <small class="text-danger" *ngIf="password?.hasError('required')">
+                                {{ ERRERROR_MESSAGES.required }}
+                            </small>
+                            <small class="text-danger" *ngIf="password?.hasError('minlength')">
+                                {{ ERRERROR_MESSAGES.inputMinlength }}
+                            </small>
+                            <small class="text-danger" *ngIf="password?.hasError('maxlength')">
+                                {{ ERRERROR_MESSAGES.inputMaxlength }}
+                            </small>
+                        </p>
+                    </div>
+
+                </ion-list>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button type="submit" expand="block">Login In</ion-button>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col class="ion-text-center">
+                        <a href="">Forgot Password?</a>
+                    </ion-col>
+                </ion-row>
+            </form>
+        </ion-card>
+    </div>
+
+    <ion-alert
+    [isOpen]="showInvalidDialog"
+    header="Credentials is Invalid "
+    message="Could not log you in with the credentials you entered. Please check your entered email and password."
+    [buttons]="confirmBtn"
+     ></ion-alert>
+
+     <ion-modal class="modal" [isOpen]="isNewCredentialsRequired">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>{{ ChangePassword.title }}</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="closeNewCredentialsRequired()">X</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <form class="auth__form" [formGroup]="changeCredentialsForm" (ngSubmit)="submitNewCredentials()">
+            <div class="auth__item">
+                <ion-label position="stacked" class="email-label">{{ ChangePassword.login }}</ion-label>
+                <ion-input
+                    class="email-input"
+                    type="email"
+                    labelPlacement="stacked"
+                    formControlName="email"
+                    [ngClass]="{'has-error': (email.touched || email.dirty) && !email.valid}"
+                >
+                </ion-input>
+            </div>
+
+            <div class="auth__item">
+                <ion-label position="stacked" class="pass-label">{{ ChangePassword.currentPassword }}</ion-label>
+                <ion-input
+                    class="pass-input"
+                    labelPlacement="stacked"
+                    type="password"
+                    formControlName="currentPassword"
+                    [ngClass]="{'has-error': (currentPassword.touched || currentPassword.dirty) && !currentPassword.valid}"
+                >
+                </ion-input>
+            </div>
+
+            <div class="auth__item">
+                <ion-label position="stacked" class="pass-label">{{ ChangePassword.newPassword }}</ion-label>
+                <ion-input
+                    class="pass-input"
+                    labelPlacement="stacked"
+                    type="password"
+                    formControlName="newPassword"
+                    [ngClass]="{'has-error': (newPassword.touched || newPassword.dirty) && !newPassword.valid}"
+                >
+                </ion-input>
+            </div>
+            <div class="auth__item">
+                <ion-label position="stacked" class="pass-label">{{ ChangePassword.confirmPassword }}</ion-label>
+                <ion-input
+                    class="pass-input"
+                    labelPlacement="stacked"
+                    type="password"
+                    formControlName="newPasswordMatch"
+                    [ngClass]="{'has-error': (newPasswordMatch.touched || newPasswordMatch.dirty) && !newPasswordMatch.valid}"
+                >
+                </ion-input>
+            </div>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button color="medium" (click)="closeNewCredentialsRequired()">{{ ChangePassword.cancelButton }}</ion-button>
+              </ion-buttons>
+              <ion-buttons slot="end">
+                <ion-button type="submit" (click)="submitNewCredentials()" [strong]="true">{{ ChangePassword.confirmButton }}</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </form>
+        </ion-content>
+
+      </ng-template>
+    </ion-modal>
+
+    <ion-toast
+    [isOpen]="isItErrorNotification"
+    [duration]="3000"
+    message="errorMessage"
+    layout="stacked"
+    ></ion-toast>
+</ion-content>

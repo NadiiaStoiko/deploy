@@ -1,0 +1,40 @@
+<ion-content class="choose-company">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button>
+                <ion-back-button [routerLink]="['/auth']" default-href="" ></ion-back-button>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Choose company</ion-title>
+    </ion-toolbar>
+    <ion-list lines="full">
+        <ion-item
+            *ngFor="let company of companies"
+            (click)="selectCompany(company)"
+        >
+            <div class="choose-company__companies">
+                <div class="company-info">
+                    <span class="company-name">{{ company.name }}</span><br>
+                    <span class="company-id">Company id: {{ company.companyId }}</span>
+                </div>
+                <div class="choose-company__choose-btn">
+                    <ion-button
+                        class="choose-company__btn"
+                        *ngIf="company.companyId !== companyManagedId"
+                        (click)="manageCompany(company)"
+                        [ngClass]="{ selected: isCompanySelected(company) }"
+                        [routerLink]="['/dashboard']"
+                    >
+                        Manage
+                    </ion-button>
+                    <ion-button
+                        class="choose-company__btn managed"
+                        *ngIf="company.companyId === companyManagedId"
+                    >
+                        Managed
+                    </ion-button>
+                </div>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

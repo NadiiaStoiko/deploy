@@ -1,0 +1,21 @@
+<ion-modal [isOpen]="opened" >
+    <ng-template>
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>{{ dialogHeader }}</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="ion-padding">
+<!--            <p style="text-align: center;">{{ errorDescription }}</p>-->
+        </ion-content>
+
+        <ion-footer>
+            <ion-toolbar>
+                <ion-buttons slot="end">
+<!--                    <ion-button (click)="closeError('close')">Okay</ion-button>-->
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-footer>
+    </ng-template>
+</ion-modal>

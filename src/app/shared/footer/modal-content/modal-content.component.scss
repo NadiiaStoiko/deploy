@@ -1,0 +1,58 @@
+.modal-menu {
+
+    &__large-btn {
+        width: 100%;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f7f7f7;
+        border-radius: 5px;
+
+        .span-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__camera-icon {
+        width: 60px;
+        height: 50px;
+        color: #3980ff;
+    }
+
+    &__icon-title {
+        font-size: 14px;
+        color: #3980ff;
+    }
+
+    &__small-btn {
+        width: 100%;
+        height: 60px;
+        background: #f7f7f7;
+        border-radius: 5px;
+    }
+
+    &__contact-icon {
+        width: 25px;
+        height: 30px;
+        color: #3980ff;
+        padding-right: 15px;
+    }
+
+    &__offer-icon {
+        width: 25px;
+        height: 30px;
+        color: #3980ff;
+        padding-right: 15px;
+    }
+
+    .span-container_small {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}

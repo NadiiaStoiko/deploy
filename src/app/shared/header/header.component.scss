@@ -1,0 +1,52 @@
+.main-menu {
+    --background: #294b8c;
+    --color: white;
+
+    &__dots {
+        --background: #f4f5f8;
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        --color: black;
+    }
+
+    &__custom-search {
+        --background: #fff;
+        --color: black;
+        --placeholder-color: #ddd;
+        --placeholder-opacity: 0.8;
+        width: 70%;
+        --border-radius: 5px;
+        --padding-start: 20px;
+        --padding-top: 7px;
+    }
+}
+
+.nav {
+    &__select {
+        position: relative;
+        text-align: left;
+        --placeholder-color: black;
+        --placeholder-opacity: 1;
+    }
+}
+
+ion-select {
+    position: relative;
+    text-align: left;
+    --placeholder-color: black;
+    --placeholder-opacity: 1;
+}
+
+ion-select::part(icon) {
+    position: absolute;
+    right: 0;
+}
+
+.hide-accordion-indicator ion-icon {
+    display: none;
+}

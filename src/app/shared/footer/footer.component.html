@@ -1,0 +1,124 @@
+<ion-menu side="end" contentId="main-content">
+    <ion-header>
+        <ion-toolbar class="footer-title">
+            <ion-title>{{ companyName }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content class="nav">
+        <ion-accordion-group>
+
+            <ion-list>
+                <ion-item (click)="onSelectionChange('/home')">
+                    <ion-label>Home Page</ion-label>
+                </ion-item>
+            </ion-list>
+
+            <!-- <ion-item (click)="onSelectionChange('/dashboard')">
+                <ion-label>Dashboard</ion-label>
+            </ion-item> -->
+
+            <!-- <ion-accordion value="banking">
+                <ion-item slot="header">
+                    <ion-label>Banking</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">AIIA</div>
+            </ion-accordion> -->
+
+            <ion-accordion value="sales">
+                <ion-item slot="header">
+                    <ion-label>Sales</ion-label>
+                </ion-item>
+                <div (click)="onSelectionChange('/draft-invoices')" class="ion-padding" slot="content">Draft Invoices
+                </div>
+                <div (click)="onSelectionChange('/invoices')" class="ion-padding" slot="content">Invoices</div>
+            </ion-accordion>
+
+            <ion-accordion value="expenses">
+                <ion-item slot="header">
+                    <ion-label>Expenses</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">Purchases</div>
+                <div class="ion-padding" slot="content">Cash Register</div>
+            </ion-accordion>
+
+            <!-- <ion-item>
+                <ion-label>Chart Accounts</ion-label>
+            </ion-item> -->
+
+            <ion-list>
+                <ion-item>
+                  <ion-label>Contucts</ion-label>
+                </ion-item>
+            </ion-list>
+            <!-- <ion-accordion value="reports">
+                <ion-item slot="header">
+                    <ion-label>Reports</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content" (click)="onSelectionChange('/report-route1')">Option 1</div>
+                <div class="ion-padding" slot="content" (click)="onSelectionChange('/report-route2')">Option 2</div>
+            </ion-accordion> -->
+
+            <ion-accordion value="settings">
+                <ion-item slot="header">
+                    <ion-label>Settings</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content" (click)="onSelectionChange('/setting-route1')">Option 1</div>
+                <div class="ion-padding" slot="content" (click)="onSelectionChange('/setting-route2')">Option 2</div>
+            </ion-accordion>
+        </ion-accordion-group>
+        <a class="title">
+            <p>Sign Out</p>
+            <ion-icon class="logout" name="log-out-outline" (click)="logout()"></ion-icon>
+        </a>
+    </ion-content>
+</ion-menu>
+
+<ion-footer class="footer" id="main-content" *ngIf="showFooter">
+    <ion-toolbar class="footer__container">
+        <ion-buttons class="footer__wrap-btn">
+            <div class="footer__item" (click)="onSelectionChange('/dashboard')">
+                <ion-button>
+                    <ion-icon class="footer-btn" src="assets/icon/footer/dashboard.svg"></ion-icon>
+                </ion-button>
+                <span>Dashboard</span>
+            </div>
+            <div class="footer__item" (click)="onSelectionChange('/invoices')">
+                <ion-button>
+                    <ion-icon class="footer-btn" src="assets/icon/footer/sales.svg"></ion-icon>
+                </ion-button>
+                <span>Sales</span>
+            </div>
+            <!--            <div class="footer__item">-->
+            <!--                <ion-button class="create-btn">-->
+            <!--                    <span class="add-btn">+</span>-->
+            <!--                </ion-button>-->
+            <!--            </div>-->
+            <div class="footer__item">
+                <ion-button class="create-btn" id="open-modal" expand="block">
+                    <span class="add-btn">+</span>
+                </ion-button>
+            </div>
+            <ion-modal trigger="open-modal" (didDismiss)="isModalOpen = false" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+                <ng-template>
+                    <div class="block">
+                        <app-modal-content></app-modal-content>
+                    </div>
+                </ng-template>
+            </ion-modal>
+
+            <div class="footer__item">
+                <ion-button>
+                    <ion-icon class="footer-btn" src="assets/icon/footer/report.svg"></ion-icon>
+                </ion-button>
+                <span>Report</span>
+            </div>
+
+            <div class="footer__item">
+                <ion-button (click)="openEndMenu()">
+                    <ion-icon class="footer-btn" src="assets/icon/footer/three_dots_menu.svg"></ion-icon>
+                </ion-button>
+                <span>More</span>
+            </div>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
