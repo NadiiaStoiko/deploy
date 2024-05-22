@@ -9,12 +9,16 @@ import {InvoiceWrapperComponent} from "./invoice-wrapper.component";
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpTokenInterceptor} from 'src/app/core/interceptors/http.token.interceptor';
 import {RegionalNumberFormatPipe} from "../../../shared/pipes/regional-number-format.pipe";
+import {InvoiceCreateComponent} from "./invoice-create/invoice-create.component";
+import {InvoiceCreateWpapperComponent} from "./invoice-create/invoice-create-wpapper/invoice-create-wpapper.component";
 
 
 @NgModule({
     declarations: [
         InvoicesComponent,
         InvoiceWrapperComponent,
+        InvoiceCreateComponent,
+        InvoiceCreateWpapperComponent,
     ],
     imports: [
         CommonModule,

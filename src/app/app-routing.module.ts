@@ -1,11 +1,18 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {
+    InvoiceCreateWpapperComponent
+} from "./feature/sales/invoices/invoice-create/invoice-create-wpapper/invoice-create-wpapper.component";
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
+        redirectTo: 'auth',
+        pathMatch: 'full',
+    },
+    {
+        path: 'invoices/create',
+        component: InvoiceCreateWpapperComponent,
     },
     {
         path: 'auth',

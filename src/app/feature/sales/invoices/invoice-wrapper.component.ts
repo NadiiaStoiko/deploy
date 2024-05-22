@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {catchError, map} from "rxjs/operators";
-import {Observable, Subject, takeUntil} from "rxjs";
+import {Observable, Subject, takeUntil, throwError} from "rxjs";
 import {IInvoiceListItem} from "../../../core/models/invoice-list-item.model";
 import {ErrorMessageDialogComponent} from "../../../shared/dialogs/error-message-dialog/error-message-dialog.component";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -13,6 +13,7 @@ import {SettingsService} from "../../../core/services/settings.service";
     <ion-content>
         <app-invoices
             [invoices$]="invoices$"
+            (invoiceCopied)="onInvoiceCopied($event)"
         ></app-invoices>
 
         <app-error-message-dialog #errorDialog></app-error-message-dialog>\`
@@ -21,22 +22,10 @@ import {SettingsService} from "../../../core/services/settings.service";
 })
 
 export class InvoiceWrapperComponent  implements OnInit, OnDestroy {
-
-    // @ViewChild('errorDialog') errorDialog: ErrorMessageDialogComponent;
-    // public isPaymentDialogOpened = false;
-    // public invoiceToPay: IInvoiceListItem;
-    // public paymentAttachmentId: number;
-    // public paymentData: IInvoicePaymentData;
     public invoices$!: Observable<IInvoiceListItem[]>;
-    // public invoicesToCreditNotes$: Observable<IInvoiceListItem[]>;
-    // public creditNotes$: Observable<IInvoiceListItem[]>;
-    // public inventories: IInventorySimplified[];
     public isLoading = true;
-    // public selectedYear: number;
-    // public isYearOpen = true;
     private invoiceService = inject(AccountingInvoiceService);
     private accountingSettingsService = inject(SettingsService);
-    // private notificationService = inject(NotificationService);
     private router: Router;
     private activatedRoute: ActivatedRoute;
     private settingsService: SettingsService;
@@ -57,6 +46,26 @@ export class InvoiceWrapperComponent  implements OnInit, OnDestroy {
             //     throw new Error(err);
             // })
         ).subscribe(() => this.isLoading = false);
+    }
+    onInvoiceCopied(invoice: IInvoiceListItem) {
+        console.log('Copying invoice:', invoice);
+
+        this.invoiceService.copyInvoice(invoice.id).pipe(
+            takeUntil(this.destroy$),
+            catchError(err => {
+                console.error('Error copying invoice:', err);
+                // this.errorDialog.openError(err.message);
+                return throwError(err);
+            }),
+        ).subscribe(copiedInvoiceId => {
+            console.log('Invoice copied successfully, new invoiceId:', copiedInvoiceId);
+            this.router.navigate(['/invoices/create'], {
+                queryParams: {
+                    invoiceId: copiedInvoiceId
+                }
+            });
+            this.invoices$ = this.invoiceService.setInvoices();
+        });
     }
 
     ngOnDestroy(): void {
@@ -132,18 +141,6 @@ export class InvoiceWrapperComponent  implements OnInit, OnDestroy {
             // ).subscribe();
         }
     }
-
-    // onInvoiceCopied(invoice: IInvoiceListItem) {
-    //     this.invoiceService.copyInvoice(invoice.id).pipe(
-    //         takeUntil(this.destroy$),
-    //         catchError(err => {
-    //             this.errorDialog.openError(err.message);
-    //             throw new Error(err);
-    //         }),
-    //     ).subscribe(invoiceId => {
-    //         this.route.navigate(['/bookkeeping/invoices/create'], { queryParams: { invoiceId: invoiceId } });
-    //     });
-    // }
 
     // onCreditNoteCreated(invoiceId: number) {
     //     this.invoiceService.createCreditNoteDeletion(invoiceId).pipe(

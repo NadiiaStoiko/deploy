@@ -1,5 +1,5 @@
 <ion-menu side="end" contentId="main-content">
-    <ion-header>
+    <ion-header *ngIf="companyName">
         <ion-toolbar class="footer-title">
             <ion-title>{{ companyName }}</ion-title>
         </ion-toolbar>
@@ -9,7 +9,7 @@
 
             <ion-list>
                 <ion-item (click)="onSelectionChange('/home')">
-                    <ion-label>Home Page</ion-label>
+                    <ion-label>Choose Company Page</ion-label>
                 </ion-item>
             </ion-list>
 
@@ -47,7 +47,7 @@
 
             <ion-list>
                 <ion-item>
-                  <ion-label>Contucts</ion-label>
+                  <ion-label>Contacts</ion-label>
                 </ion-item>
             </ion-list>
             <!-- <ion-accordion value="reports">
@@ -66,9 +66,9 @@
                 <div class="ion-padding" slot="content" (click)="onSelectionChange('/setting-route2')">Option 2</div>
             </ion-accordion>
         </ion-accordion-group>
-        <a class="title">
+        <a class="title" (click)="logout()">
             <p>Sign Out</p>
-            <ion-icon class="logout" name="log-out-outline" (click)="logout()"></ion-icon>
+            <ion-icon class="logout" name="log-out-outline"></ion-icon>
         </a>
     </ion-content>
 </ion-menu>
@@ -101,7 +101,7 @@
             <ion-modal trigger="open-modal" (didDismiss)="isModalOpen = false" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
                 <ng-template>
                     <div class="block">
-                        <app-modal-content></app-modal-content>
+                        <app-modal-content (photoSelected)="onPhotoSelected($event)"></app-modal-content>
                     </div>
                 </ng-template>
             </ion-modal>
@@ -122,3 +122,5 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>
+
+<ion-router-outlet id="main-content"></ion-router-outlet>

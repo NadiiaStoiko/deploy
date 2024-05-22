@@ -28,13 +28,17 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     public dateFormat = 'dd/MM/yyyy';
     private accountingSettingsService = inject(SettingsService);
     // public regionalNumberFormat = inject(RegionalNumberFormatPipe);
-
+    @Output() invoiceCopied = new EventEmitter<IInvoiceListItem>();
     @Output()
     public invoiceSeen = new EventEmitter();
+    @Output()
+    // public invoiceCopied = new EventEmitter();
     // public selectedType = 'invoices';
     invoices: IInvoiceListItem[] = [];
+    public invoiceToEdit!: IInvoiceListItem;
     private subscription: Subscription = new Subscription();
     private _invoices$: Observable<IInvoiceListItem[]> | undefined;
+    // public invoiceToEdit: IInvoiceListItem;
     constructor(
         private invoiceService: AccountingInvoiceService,
     ) {}
@@ -46,6 +50,10 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         }, error => {
             console.error('Error', error);
         });
+    }
+
+    copyInvoice(invoice: IInvoiceListItem) {
+        this.invoiceCopied.emit(invoice);
     }
 
     public get invoices$(): Observable<IInvoiceListItem[]> | undefined {

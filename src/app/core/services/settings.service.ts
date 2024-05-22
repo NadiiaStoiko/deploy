@@ -16,18 +16,18 @@ export class SettingsService {
     private accountingApiService = inject(AccountingApiService);
     private companyCashedSettings$ = new BehaviorSubject<IAccountingCompany[]>([]);
     private managedCompanyId?: number;
-    private currentCompanyName = new BehaviorSubject<string>('Default Company Name');
+    private currentCompanyName$ = new BehaviorSubject<string>('');
 
     constructor() {
         this.updateManagedCompanyId();
     }
 
     setCurrentCompanyName(name: string) {
-        this.currentCompanyName.next(name);
+        this.currentCompanyName$.next(name);
     }
 
     getCurrentCompanyName(): Observable<string> {
-        return this.currentCompanyName.asObservable();
+        return this.currentCompanyName$.asObservable();
     }
 
     setManagedCompanyId(companyId: number): void {

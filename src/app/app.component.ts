@@ -8,6 +8,11 @@ import {SettingsService} from "./core/services/settings.service";
 })
 export class AppComponent {
     currentCompanyName: string = '';
+    photoData: string = '';
+
+    onPhotoSelectedFromFooter(photoData: string) {
+        this.photoData = photoData;
+    }
 
     constructor(private settingsService: SettingsService) {
         this.loadCompanyName();
@@ -18,5 +23,9 @@ export class AppComponent {
             console.log("Received company name:", companyName);
             this.currentCompanyName = companyName;
         });
+    }
+
+    onPhotoFromFooter(photoData: string) {
+        this.photoData = photoData;
     }
 }

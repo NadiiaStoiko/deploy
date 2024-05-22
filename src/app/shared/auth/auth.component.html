@@ -12,9 +12,9 @@
                             labelPlacement="stacked"
                             formControlName="email"
                             [ngClass]="{'has-error': (email.touched || email.dirty) && !email.valid}"
+                            placeholder="Your Organization Email"
                         >
                         </ion-input>
-                        <p class="helperText">Your Organization Email</p>
                         <p class="card-text help-block"
                            *ngIf="(email?.touched || email?.dirty) && email?.errors">
                             <small class="text-danger" *ngIf="email?.hasError('required')">
@@ -37,9 +37,11 @@
                             type="password"
                             formControlName="password"
                             [ngClass]="{'has-error': (password.touched || password.dirty) && !password.valid}"
+                            placeholder = "Your password"
                         >
+                          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
                         </ion-input>
-                        <p class="helperText">Your password</p>
+                        <!-- <p class="helperText">Your password</p> -->
                         <p class="card-text help-block"
                            *ngIf="(password?.touched || password?.dirty) && password?.errors">
                             <small class="text-danger" *ngIf="password?.hasError('required')">
@@ -58,7 +60,7 @@
 
                 <ion-row>
                     <ion-col>
-                        <ion-button type="submit" expand="block">Login In</ion-button>
+                        <ion-button id="showInvalidDialog ? present-alert : other" type="submit" expand="block">Login In</ion-button>
                     </ion-col>
                 </ion-row>
 
@@ -72,6 +74,7 @@
     </div>
 
     <ion-alert
+    trigger="present-alert"
     [isOpen]="showInvalidDialog"
     header="Credentials is Invalid "
     message="Could not log you in with the credentials you entered. Please check your entered email and password."

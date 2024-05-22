@@ -1,0 +1,32 @@
+<ion-content class="invoices">
+    <div *ngIf="invoiceEdited">
+        <ion-toolbar>
+            <strong>Invoice # {{ invoiceEdited?.invoiceNumber }}</strong>
+        </ion-toolbar>
+        <div class="invoices__content">
+            <ion-item-sliding class="invoices__items" #itemSliding>
+                <ion-item>
+                    <ion-label class="invoices__wrap">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size="7" class="size">Total Amount:</ion-col>
+                                <ion-col size="4" class="size">
+                                    <strong>{{ invoiceEdited.totalAmount }}</strong>
+                                </ion-col>
+                                <ion-col size="1" class="size"></ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options class="invoices__options" side="start">
+                    <div class="invoices__option-item invoices__option-delete">
+                        <ion-item-option class="invoices__option invoices__option-delete">
+                            <ion-icon slot="icon-only" name="trash"></ion-icon>
+                        </ion-item-option>
+                        <span>Delete</span>
+                    </div>
+                </ion-item-options>
+            </ion-item-sliding>
+        </div>
+    </div>
+</ion-content>

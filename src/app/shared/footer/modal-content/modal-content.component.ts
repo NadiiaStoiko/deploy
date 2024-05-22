@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Camera, CameraSource, CameraResultType} from '@capacitor/camera';
 import {options} from "ionicons/icons";
 import {Capacitor} from "@capacitor/core";
@@ -9,8 +9,9 @@ import {Capacitor} from "@capacitor/core";
     styleUrls: ['./modal-content.component.scss'],
 })
 export class ModalContentComponent implements OnInit {
-    path: string = '';
 
+    path: string = '';
+    @Output() photoSelected = new EventEmitter<string>();
     constructor() {
     }
 
@@ -29,6 +30,7 @@ export class ModalContentComponent implements OnInit {
             const image = await Camera.getPhoto(options);
             if (image.dataUrl) {
                 this.path = image.dataUrl;
+                this.photoSelected.emit(image.dataUrl);
             }
         } catch (error) {
             alert('Ошибка при захвате фото: ' + (error instanceof Error ? error.message : String(error)));

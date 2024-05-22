@@ -1,4 +1,4 @@
 <ion-app>
     <ion-router-outlet></ion-router-outlet>
-    <app-footer [companyName]="currentCompanyName"></app-footer>
+    <app-footer [companyName]="currentCompanyName" (photoFromFooter)="onPhotoFromFooter($event)"></app-footer>
 </ion-app>

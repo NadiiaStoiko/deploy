@@ -1,6 +1,6 @@
 import {EventEmitter, inject, Injectable, Output} from '@angular/core';
-import {BehaviorSubject, Observable, switchMap} from "rxjs";
-import {map, tap} from "rxjs/operators";
+import {BehaviorSubject, Observable, switchMap, throwError} from "rxjs";
+import {catchError, map, tap} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {AccountingApiService} from "./accounting-api.service";
 import {SettingsService} from "./settings.service";
@@ -96,9 +96,16 @@ export class AccountingInvoiceService {
     //     return this.accountingApiService.post(`/sales/invoice/${this.companyId}`);
     // }
     //
-    // copyInvoice(id: number) {
-    //     return this.accountingApiService.post(`/sales/invoice/${id}/copy`);
-    // }
+    copyInvoice(id: number) {
+        console.log('Copying invoice with id:', id);
+        return this.accountingApiService.post(`/sales/invoice/${id}/copy`).pipe(
+            tap(response => console.log('Response from API:', response)),
+            catchError(err => {
+                console.error('Error copying invoice:', err);
+                return throwError(err);
+            })
+        );
+    }
     //
     // updateInvoice(data: IInvoiceUpdateRequest) {
     //     return this.accountingApiService.put(`/sales/invoice/${data.id}`, data);
