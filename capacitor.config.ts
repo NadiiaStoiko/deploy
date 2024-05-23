@@ -4,9 +4,11 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'mobile-app',
   webDir: 'www',
-  server: {
-    androidScheme: 'https'
-  }
+  plugins: {
+    CapacitorHttp: {
+      enabled: true,
+    },
+  },
 };
 
 export default config;
